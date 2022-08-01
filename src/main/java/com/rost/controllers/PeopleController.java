@@ -52,12 +52,18 @@ public class PeopleController {
         return "people/edit";
     }
 
-    @PatchMapping("")
+    @PatchMapping()
     public String updatePerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "people/edit";
         }
         personDAO.updatePerson(person);
         return "redirect:/people/" + person.getId();
+    }
+
+    @DeleteMapping("/{id}")
+    public String deletePersonById(@PathVariable("id") int id) {
+        personDAO.deletePersonById(id);
+        return "redirect:/people";
     }
 }
