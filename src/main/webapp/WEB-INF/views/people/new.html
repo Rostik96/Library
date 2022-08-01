@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>New</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+  <label for="firstName">Enter first name:</label>
+  <input type="text" th:field="*{firstName}" id="firstName"/>
+  <div style="color:red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">first name error</div>
+  <br/>
+  <label for="lastName">Enter last name:</label>
+  <input type="text" th:field="*{lastName}" id="lastName"/>
+  <div style="color:red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">last name error</div>
+  <br/>
+  <label for="patronymic">Enter patronymic:</label>
+  <input type="text" th:field="*{patronymic}" id="patronymic"/>
+  <div style="color:red" th:if="${#fields.hasErrors('patronymic')}" th:errors="*{patronymic}">patronymic error</div>
+  <br/>
+  <label for="birthYear">Enter birthYear:</label>
+  <input type="text" th:field="*{birthYear}" id="birthYear"/>
+  <div style="color:red" th:if="${#fields.hasErrors('birthYear')}" th:errors="*{birthYear}">birth year error</div>
+  <br/>
+
+  <input type="submit" value="Create">
+</form>
+</body>
+</html>

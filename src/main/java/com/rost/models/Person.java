@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 @AllArgsConstructor
@@ -14,19 +16,22 @@ import javax.validation.constraints.Pattern;
 public class Person {
     private int id;
 
-    @Pattern(regexp = "[A-Z[А-Я]]\\w+", message = "First name must begin with a capital letter and contain at least 2 characters")
+    public Person() {} //must have
+
+    @Pattern(regexp = "[A-Z]\\w+", message = "First name must begin with a capital letter and contain at least 2 characters")
     private String firstName;
 
-    @Pattern(regexp = "[A-Z[А-Я]]\\w+", message = "Last name must begin with a capital letter and contain at least 2 characters")
+    @Pattern(regexp = "[A-Z]\\w+", message = "Last name must begin with a capital letter and contain at least 2 characters")
     private String lastName;
 
-    @Pattern(regexp = "[A-Z[А-Я]]\\w+", message = "Patronymic must begin with a capital letter and contain at least 2 characters")
+    @Pattern(regexp = "[A-Z]\\w+", message = "Patronymic must begin with a capital letter and contain at least 2 characters")
     private String patronymic;
 
-    @Pattern(regexp = "\\d{4}", message = "Birth year must have four digits")
+    @Min(value = 1910, message = "Birth year should be correct")
+    @Max(value = 2009, message = "Birth year should be correct")
     private int birthYear;
 
-    private String getFullName() {
+    public String getFullName() {
         return String.format("%s %s %s", lastName, firstName, patronymic);
     }
 }

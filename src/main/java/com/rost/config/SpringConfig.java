@@ -19,7 +19,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@PropertySource("classpath:/database.properties")
+@PropertySource("classpath:database.properties")
 @ComponentScan("com.rost")
 @EnableWebMvc
 public class SpringConfig implements WebMvcConfigurer {
