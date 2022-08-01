@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -63,6 +64,10 @@ public class PeopleController {
 
     @DeleteMapping("/{id}")
     public String deletePersonById(@PathVariable("id") int id) {
+        boolean hasBooks = personDAO.personHasBooks(id);
+        if (hasBooks) {
+            return "redirect:/people/" + id;
+        }
         personDAO.deletePersonById(id);
         return "redirect:/people";
     }

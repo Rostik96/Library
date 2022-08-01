@@ -22,10 +22,6 @@ public class PersonDAO {
 
     private final BeanPropertyRowMapper<Person> personMapper = new BeanPropertyRowMapper<>(Person.class);
 
-    public int getCurrentMaxId() {
-        return jdbcTemplate.queryForObject("SELECT max(id) FROM person", Integer.class);
-    }
-
     public List<Person> readPeople() {
         return jdbcTemplate.query("SELECT id, first_name, last_name, patronymic, birth_year FROM person", personMapper);
     }
@@ -49,5 +45,16 @@ public class PersonDAO {
     public void deletePersonById(int id) {
         jdbcTemplate.update("DELETE FROM person WHERE id = ?", id);
     }
+
+    //util methods
+    public int getCurrentMaxId() {
+        return jdbcTemplate.queryForObject("SELECT max(id) FROM person", Integer.class);
+    }
+
+    public boolean personHasBooks(int id) {
+        int count = jdbcTemplate.queryForObject("SELECT count(title) FROM book WHERE person_id = " + id, Integer.class);
+        return count > 0;
+    }
+
     //main-method test
 }
