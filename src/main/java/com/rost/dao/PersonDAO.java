@@ -40,5 +40,10 @@ public class PersonDAO {
         jdbcTemplate.update("INSERT INTO person(first_name, last_name, patronymic, birth_year) VALUES (?, ?, ?, ?)",
                 person.getFirstName(), person.getLastName(), person.getPatronymic(), person.getBirthYear());
     }
+
+    public void updatePerson(Person person) {
+        jdbcTemplate.update("UPDATE person SET first_name = ?, last_name = ?, patronymic = ?, birth_year = ? WHERE ID = ?",
+                person.getFirstName(), person.getLastName(), person.getPatronymic(), person.getBirthYear(), person.getId());
+    }
     //main-method test
 }
